@@ -1,0 +1,51 @@
+{% extends 'Principal.html' %}
+{% block content %}
+<div class="container px-lg-5 ">
+    <h1 id="letr" class="text-center titulo pb-3 pt-5 font">LISTA DE ROLES Y SALIDAS DEL DIA </h1>
+    <form method="get">
+        <div class="row pb-2 texto">
+            <div class="col-md-3 pb-2 contenedor">
+                <label class="font pb-1" for="categoria">Filtrar por Categoría:</label>
+                <select class="form-control" id="categoria" name="categoria">
+                    <option value="">Todas las categorías</option>
+                    {% for categoria in categorias %}
+                    <option value="{{ categoria }}">{{ categoria }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-2 d-flex align-items-end pb-2">
+                <button type="submit" class="btn btn-primary">Filtrar Datos</button>
+            </div>
+        </div>
+    </form>
+    <div class="contenedor">
+        <table class="table">
+            <thead class="table table-dark table-striped">
+              <tr class="">
+                <th scope="col">ASIGNACION</th>
+                <th scope="col">HORARIO INICIO</th>
+                <th scope="col">HORARIO FINALIZACION</th>
+                <th scope="col">CHOFER O ENCARGADO</th>
+                <th scope="col">ACCIONES</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for rol in roles_salida %}
+                <tr>
+                    <td>{{ rol.nombre }}</td>
+                    <td>{{ rol.hora_inicio|time:"H:i" }}</td>
+                    <td>{{ rol.hora_fin|time:"H:i" }}</td>
+                    <td>{{ rol.persona }}</td>
+                    <td>
+                        <a class="btn btn-warning"> Editar</a> ||
+                        <a class="btn btn-danger"> Eliminar</a> 
+                    </td>
+                </tr>
+                {% empty %}
+                <H4 class="font text-end pb-2 texto">No hay roles de salida para mostrar.</H4>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>  
+</div><br><br><br><br>
+{% endblock %}

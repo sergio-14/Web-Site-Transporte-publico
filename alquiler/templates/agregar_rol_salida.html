@@ -1,0 +1,23 @@
+{% extends 'Principal.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container px-lg-5 font">
+    <div class="container px-lg-5 ">
+        <div class="container px-lg-5 ">
+            <h1 id="letr" class="text-center titulo pb-2 pt-5">AGREGAR NUEVO ROL DE SALIDA</h1>
+            <div class="contenedor texto">
+                <form method="post" class="px-lg-5">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <br>
+                    <a>
+                        <input name="" id="boton1" class="btn btn-primary" type="submit" value="Enviar Información">
+                    </a>
+                    <a name="" id="boton1" class="btn btn-danger" href="{% url 'home' %}" role="button">Cancelar</a>
+                    
+                </form>
+            </div>
+        </div><br><br><br>
+    </div>
+</div><br><br><br>
+{% endblock %}

@@ -1,0 +1,71 @@
+{% extends 'Principal.html' %}
+{% block content %}
+<div class="container px-lg-5 ">
+    <h1 id="letr" class="text-center pb-3 pt-4 titulo font">ARQUEO Y REPORTE DE GANANCIAS</h1>
+        <form method="get" class="mb-3 contenedor">
+            <div class="row texto">
+                <div class="col-md-3 pb-2">
+                    <div class="form-group">
+                        <label class="font" for="fecha_inicio">Desde la Fecha:</label>
+                        <input type="date" class="form-control" id="fecha_inicio" name="fecha_inicio" value="{{ fecha_inicio }}">
+                    </div>
+                </div>
+                <div class="col-md-3 pb-2">
+                    <div class="form-group">
+                        <label  class="font" for="fecha_fin">Hasta la Fecha:</label>
+                        <input type="date" class="form-control" id="fecha_fin" name="fecha_fin" value="{{ fecha_fin }}">
+                    </div>
+                </div>
+                <div class="col-md-4 pb-2">
+                    <div class="form-group">
+                        <label class="font" for="categoria">Categoría:</label>
+                        <select class="form-control" id="categoria" name="categoria">
+                            <option value="">Todas</option>
+                            {% for categoria in categorias %}
+                            <option value="{{ categoria.id }}" {% if categoria.id == categoria_id %}selected{% endif %}>{{ categoria.categoria }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-2 d-flex align-items-end pb-2">
+                    <button type="submit" class="btn btn-primary">Filtrar Datos</button>
+                </div>
+            </div>
+        </form>
+
+
+        <h4 class="font text-end texto">Total Ganancias : {{ total_ganancias }} Bs.</h4>
+        <div class="contenedor">
+            <table class="table">
+                <thead class="table table-dark table-striped">
+                  <tr class="">
+                    <th scope="col">Persona</th>
+                    <th scope="col">Categoría</th>
+                    <th scope="col">Cliente</th>
+                    <th scope="col">Detalle</th>
+                    <th scope="col">Fecha</th>
+                    <th scope="col">Boleto</th>
+                    <th scope="col">Total</th>
+                    <th scope="col">Asiento</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for registro in registros %}
+                    <tr>
+                        <td>{{ registro.persona }}</td>
+                        <td>{{ registro.persona.categoria.categoria }}</td>
+                        <td>{{ registro.cliente }}</td>
+                        <td>{{ registro.detalle }}</td>
+                        <td>{{ registro.fecha }}</td>
+                        <td>{{ registro.boleto }}</td>
+                        <td>{{ registro.total }}</td>
+                        <td>{{ registro.asiento }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>  
+        </div>
+</div><br><br><br><br>
+{% endblock %}
+
+

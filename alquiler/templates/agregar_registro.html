@@ -1,0 +1,71 @@
+{% extends 'Principal.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<div class="container px-lg-5 font">
+    <div class="container px-lg-5 ">
+        <div class="container">
+            <h1 id="letr" class="text-center titulo pb-2 pt-5">REGISTRO DE VENTA DE PASAJES </h1>
+            <div class="row texto contenedor">
+                <!-- Primera columna: Formulario -->
+                <div class="col-md-8 pt-4">
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ form|crispy }}<br>
+                        <a>
+                            <input name="" id="boton1" class="btn btn-primary" type="submit" value="Enviar Información">
+                        </a>
+                        <a name="" id="boton1" class="btn btn-danger" href="{% url 'home' %}" role="button">Cancelar</a>
+                    </form>
+                    <br>
+                </div>
+    
+                <!-- Segunda columna: Asientos disponibles y ocupados -->
+                <div class="col-md-4 text-right pt-4">
+                    <div class="row">
+                        <div class="col-5">
+                            <h4>Disponibles</h4>
+                            <ul id="asientos-disponibles" class="list-group"></ul>
+                        </div>
+                        <div class="col-5">
+                            <h4>Ocupados</h4>
+                            <ul id="asientos-ocupados" class="list-group"></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div><br><br><br><br>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#id_persona').change(function() {
+            var personaId = $(this).val();
+            $.ajax({
+                url: '{% url "get_asientos_disponibles" %}',
+                data: {
+                    'persona_id': personaId
+                },
+                success: function(data) {
+                    var $asiento = $('#id_asiento');
+                    var $asientosDisponibles = $('#asientos-disponibles');
+                    var $asientosOcupados = $('#asientos-ocupados');
+                    $asiento.empty();
+                    $asientosDisponibles.empty();
+                    $asientosOcupados.empty();
+                    
+                    $.each(data.asientos_disponibles, function(index, value) {
+                        $asiento.append($('<option></option>').attr('value', value).text(value));
+                        $asientosDisponibles.append($('<li></li>').addClass('list-group-item').text(value));
+                    });
+                    
+                    $.each(data.asientos_ocupados, function(index, value) {
+                        $asientosOcupados.append($('<li></li>').addClass('list-group-item').text(value));
+                    });
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}
