@@ -99,22 +99,33 @@ from .models import RolSalida
 from datetime import datetime, date, timedelta
 
 def lista_rol_salida(request):
-    # Obtener todas las categorías disponibles
+
     categorias = Categoria.objects.all()
 
-    # Obtener la categoría por la que se quiere filtrar
+   
     categoria_filtrar = request.GET.get('categoria', None)
 
-    # Obtener la fecha actual y definir el rango de horas para hoy
     now = datetime.now()
     start_of_day = datetime.combine(date.today(), datetime.min.time())
     end_of_day = datetime.combine(date.today(), datetime.max.time())
 
-    # Filtrar los roles de salida por categoría y dentro del rango de horas de hoy
+    
     roles_salida = RolSalida.objects.filter(
         persona__categoria__categoria=categoria_filtrar,
-        hora_inicio__gte=start_of_day.time(),         # Hora de inicio mayor o igual a la hora inicial de hoy
-        hora_inicio__lte=end_of_day.time()            # Hora de inicio menor o igual a la hora final de hoy
+        hora_inicio__gte=start_of_day.time(),
+        hora_inicio__lte=end_of_day.time(),
+        status='pendiente'
     )
 
     return render(request, 'lista_rol_salida.html', {'roles_salida': roles_salida, 'categorias': categorias})
+
+from django.shortcuts import get_object_or_404, redirect
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+
+def cambiar_estado_rol_salida(request, rol_id):
+    rol = get_object_or_404(RolSalida, id=rol_id)
+    if rol.status == 'pendiente':
+        rol.status = 'realizado'
+        rol.save()
+    return HttpResponseRedirect(reverse('lista_rol_salida'))

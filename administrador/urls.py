@@ -27,6 +27,7 @@ urlpatterns = [
     path('get_asientos_disponibles/', views.get_asientos_disponibles, name='get_asientos_disponibles'),
     path('agregar-rol-salida/', views.agregar_rol_salida, name='agregar_rol_salida'),
     path('lista-rol-salida/', views.lista_rol_salida, name='lista_rol_salida'),
+    path('cambiar_estado_rol_salida/<int:rol_id>/', views.cambiar_estado_rol_salida, name='cambiar_estado_rol_salida'),
     #logueamiento
     path('logout/', views.signout, name='logout'),
     path('signin/', views.signin, name='signin'),

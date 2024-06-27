@@ -3,8 +3,8 @@
 <div class="container px-lg-5 ">
     <h1 id="letr" class="text-center titulo pb-3 pt-5 font">LISTA DE ROLES Y SALIDAS DEL DIA </h1>
     <form method="get">
-        <div class="row pb-2 texto">
-            <div class="col-md-3 pb-2 contenedor">
+        <div class="row pb-2 texto px-3">
+            <div class="col-md-3 pb-2 contenedor me-2">
                 <label class="font pb-1" for="categoria">Filtrar por Categoría:</label>
                 <select class="form-control" id="categoria" name="categoria">
                     <option value="">Todas las categorías</option>
@@ -13,14 +13,15 @@
                     {% endfor %}
                 </select>
             </div>
-            <div class="col-md-2 d-flex align-items-end pb-2">
+            <div class="col-md-2 d-flex align-items-end m-2 pb-2">
                 <button type="submit" class="btn btn-primary">Filtrar Datos</button>
             </div>
         </div>
     </form>
+    
     <div class="contenedor">
         <table class="table">
-            <thead class="table table-dark table-striped">
+            <thead class="">
               <tr class="">
                 <th scope="col">ASIGNACION</th>
                 <th scope="col">HORARIO INICIO</th>
@@ -32,13 +33,16 @@
             <tbody>
                 {% for rol in roles_salida %}
                 <tr>
-                    <td>{{ rol.nombre }}</td>
-                    <td>{{ rol.hora_inicio|time:"H:i" }}</td>
-                    <td>{{ rol.hora_fin|time:"H:i" }}</td>
-                    <td>{{ rol.persona }}</td>
-                    <td>
-                        <a class="btn btn-warning"> Editar</a> ||
-                        <a class="btn btn-danger"> Eliminar</a> 
+                    <td data-label="Turno">{{ rol.nombre }}</td>
+                    <td data-label="Hora Turno inicio">{{ rol.hora_inicio|time:"H:i" }}</td>
+                    <td data-label="Hora Turno Salida">{{ rol.hora_fin|time:"H:i" }}</td>
+                    <td data-label="Chofer o Responsable">{{ rol.persona }}</td>
+                    <td data-label="Acciones">
+                        <form action="{% url 'cambiar_estado_rol_salida' rol.id %}" method="post">
+                            {% csrf_token %}
+                            <button class="btn btn-success m-1" type="submit">Realizado</button>
+                        </form>
+                        <a name="" id="boton1" class="btn btn-warning px-4 m-1" href="" role="button">Editar</a>
                     </td>
                 </tr>
                 {% empty %}

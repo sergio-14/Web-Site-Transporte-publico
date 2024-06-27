@@ -40,13 +40,16 @@ class Turno(models.Model):
         return self.nombre
     
 class RolSalida(models.Model):
+    STATUS_CHOICES = [
+        ('pendiente', 'Pendiente'),
+        ('realizado', 'Realizado'),
+    ]
+
     nombre = models.CharField(max_length=50, verbose_name='Agregar Turno o Descripcion')
     hora_inicio = models.TimeField()
     hora_fin = models.TimeField()
     persona = models.ForeignKey(Persona, on_delete=models.CASCADE, verbose_name='Asignar Personal o Chofer')
-
-    def __str__(self):
-        return self.nombre
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='pendiente', verbose_name='Estado')
 
 class ventaboletos(models.Model):
     persona = models.ForeignKey(Persona, on_delete=models.CASCADE, verbose_name='Chofer o Persona a Cargo')

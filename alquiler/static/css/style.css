@@ -112,7 +112,7 @@
   position: absolute;
   bottom: 0;
   width: 100%;
-  height: 40px;
+  height: 50px;
   background: rgba(255, 255, 255, 0.05);
   display: flex;
   justify-content: center;
@@ -123,7 +123,13 @@
   font-size: 2.5em;
   fill: #fff;
 }
-
+@media (max-width: 760px) {
+  .containerr .glass {
+    width: 150px;
+    height: 200px;
+   
+  }
+}
 .bg-fondo {
   background: #001627;
 }
@@ -195,8 +201,6 @@
   color: #a5aec0;
 }
 
-
-/* card */
 .carde {
   position: relative;
   width: 920px;
@@ -249,6 +253,7 @@
 
 .carde:hover svg {
   scale: 0;
+  color: #001a2f;
 }
 
 .card__description {
@@ -256,7 +261,33 @@
   font-size: 24px;
   color: #f0faff;
   line-height: 1.4;
-  font-family:"Lobster";
+  font-family: "Lobster";
+}
+
+/* Styles for smaller screens */
+@media (max-width: 760px) {
+  .carde {
+    width: 280px;
+    height: 200px;
+  }
+
+  .carde img {
+    width: 280px;
+    height: 200px;
+  }
+
+  .card__title {
+    font-size: 10px;
+  }
+
+  .card__description {
+    font-size: 10px;
+  }
+
+  .btn {
+    font-size: 10px;
+    padding: 2px 4px;
+  }
 }
 
 
@@ -769,5 +800,84 @@
   }
   100% {
     transform: rotateX(360deg) rotateY(360deg);
+  }
+}
+.imgicono{
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+
+}
+/* tabla responsive */
+.table {
+  border-radius: 10px;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  table-layout: fixed;
+}
+
+.table tr {
+  background-color: #a3b2d1;
+  border: 1px solid #d2e6e9;
+}
+
+.table th, .table td {
+  font-size: 16px;
+  padding: 8px;
+  text-align: center;
+}
+
+.table thead th{ 
+  text-transform: uppercase;
+  background-color: #020b1f;
+  color: #a7c0d4;
+}
+.table tbody tr td{
+  background-color:#001627;
+  color: #cbd1d6;
+}
+
+.table tbody tr:hover {
+  background-color: rgba(0, 0, 0, 0.151);
+}
+
+.table tbody td:hover {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+@media screen and (max-width: 600px) {
+  .table {
+      border: 0px;
+  }
+  .table caption {
+      font-size: 22px;
+  }
+  .table thead {
+      display: none;
+  }
+  .table tr {
+      margin-bottom: 8px;
+      border-bottom: 4px solid #6b6a7c80;
+      display: block;
+  }
+  .table th, .table td {
+      font-size: 12px;
+  }
+  .table td {
+      display: block;
+      border-bottom: 1px solid #dddddd09;
+      text-align: right;
+  }
+  .table  td:last-child {
+      border-bottom: 0px;
+  }
+  .table td::before {
+      content: attr(data-label);
+      font-weight: bold;
+      text-transform: uppercase;
+      float: left;
   }
 }

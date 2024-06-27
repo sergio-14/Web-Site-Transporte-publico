@@ -14,9 +14,9 @@
                         {% csrf_token %}
                         {{ form|crispy }}<br>
                         <a>
-                            <input name="" id="boton1" class="btn btn-primary" type="submit" value="Enviar Información">
+                            <input name="" id="boton1" class="btn btn-primary m-2" type="submit" value="Enviar Información">
                         </a>
-                        <a name="" id="boton1" class="btn btn-danger" href="{% url 'home' %}" role="button">Cancelar</a>
+                        <a name="" id="boton1" class="btn btn-danger m-2" href="{% url 'home' %}" role="button">Cancelar</a>
                     </form>
                     <br>
                 </div>
@@ -25,11 +25,11 @@
                 <div class="col-md-4 text-right pt-4">
                     <div class="row">
                         <div class="col-5">
-                            <h4>Disponibles</h4>
+                            <h6>Disponibles</h6>
                             <ul id="asientos-disponibles" class="list-group"></ul>
                         </div>
                         <div class="col-5">
-                            <h4>Ocupados</h4>
+                            <h6>Ocupados</h6>
                             <ul id="asientos-ocupados" class="list-group"></ul>
                         </div>
                     </div>

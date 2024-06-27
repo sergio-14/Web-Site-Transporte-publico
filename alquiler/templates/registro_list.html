@@ -39,27 +39,34 @@
             <table class="table">
                 <thead class="table table-dark table-striped">
                   <tr class="">
-                    <th scope="col">Persona</th>
+                    <th scope="col">Foto</th>
+                    <th scope="col">Chofer</th>
                     <th scope="col">Categoría</th>
                     <th scope="col">Cliente</th>
                     <th scope="col">Detalle</th>
                     <th scope="col">Fecha</th>
                     <th scope="col">Boleto</th>
-                    <th scope="col">Total</th>
                     <th scope="col">Asiento</th>
+                    <th scope="col">Total</th>
                   </tr>
                 </thead>
                 <tbody>
                     {% for registro in registros %}
                     <tr>
-                        <td>{{ registro.persona }}</td>
-                        <td>{{ registro.persona.categoria.categoria }}</td>
-                        <td>{{ registro.cliente }}</td>
-                        <td>{{ registro.detalle }}</td>
-                        <td>{{ registro.fecha }}</td>
-                        <td>{{ registro.boleto }}</td>
-                        <td>{{ registro.total }}</td>
-                        <td>{{ registro.asiento }}</td>
+                        <td data-label="Foto">
+                            {% if registro.persona.imagen %}
+                                <img src="{{ registro.persona.imagen.url }}" class="imgicono" alt="Imagen de {{ registro.persona.user.get_full_name }}">
+                            {% endif %}
+                            
+                        </td>
+                        <td data-label="Chofer">{{ registro.persona.user.get_full_name }}</td>
+                        <td data-label="Modelo de Auto">{{ registro.persona.categoria.categoria }}</td>
+                        <td data-label="Nombre Cliente">{{ registro.cliente }}</td>
+                        <td data-label="Detalle">{{ registro.detalle }}</td>
+                        <td data-label="Fecha">{{ registro.fecha }}</td>
+                        <td data-label="Boleto">N°: {{ registro.boleto }}</td>
+                        <td data-label="Asiento">N°: {{ registro.asiento }}</td>
+                        <td data-label="Total Pagar">{{ registro.total }} Bs.</td>
                     </tr>
                     {% endfor %}
                 </tbody>
