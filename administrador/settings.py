@@ -219,7 +219,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-#ALLOWED_HOSTS = ['*','web-production-2464.up.railway.app']
+ALLOWED_HOSTS = ['*','web-production-901a.up.railway.app']
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
